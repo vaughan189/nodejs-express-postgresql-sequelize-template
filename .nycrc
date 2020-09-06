@@ -1,0 +1,26 @@
+{
+  "extends": "@istanbuljs/nyc-config-babel",
+  "cache": false,
+  "check-coverage": false,
+  "extension": [
+    ".js"
+  ],
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "coverage/**",
+    "node_modules/**",
+    "**/*.test.js",
+    "src/**/*.spec.js",
+    "tests/**/*.js"
+  ],
+  "sourceMap": true,
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "all": true,
+  "instrument": true
+}

@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import config from 'dotenv';
-import express from "express";
-import bodyParser from "body-parser";
+import express from 'express';
+import bodyParser from 'body-parser';
 import Routes from './routes';
 
 config.config();
@@ -14,9 +15,9 @@ const port = process.env.PORT || 3000; // when a random route is imputed
 
 app.use('/api/v1', Routes);
 
-app.get("*", (req, res) =>
+app.get('*', (req, res) =>
   res.status(200).send({
-    message: "Welcome to this API.",
+    message: 'Welcome to this API.'
   })
 );
 

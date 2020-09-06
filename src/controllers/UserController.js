@@ -1,5 +1,5 @@
-import UserService from "../services/UserService";
-import Util from "../utils/Utils";
+import UserService from '../services/UserService';
+import Util from '../utils/Utils';
 
 const util = new Util();
 
@@ -8,9 +8,9 @@ class UserController {
     try {
       const allUsers = await UserService.getAllUsers();
       if (allUsers.length > 0) {
-        util.setSuccess(200, "Users retrieved", allUsers);
+        util.setSuccess(200, 'Users retrieved', allUsers);
       } else {
-        util.setSuccess(200, "No User found");
+        util.setSuccess(200, 'No User found');
       }
       return util.send(res);
     } catch (error) {
@@ -27,7 +27,7 @@ class UserController {
     const newUser = req.body;
     try {
       const createdUser = await UserService.addUser(newUser);
-      util.setSuccess(201, "User Added!", createdUser);
+      util.setSuccess(201, 'User Added!', createdUser);
       return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
@@ -39,7 +39,7 @@ class UserController {
     const alteredUser = req.body;
     const { id } = req.params;
     if (!Number(id)) {
-      util.setError(400, "Please input a valid numeric value");
+      util.setError(400, 'Please input a valid numeric value');
       return util.send(res);
     }
     try {
@@ -47,7 +47,7 @@ class UserController {
       if (!updateUser) {
         util.setError(404, `Cannot find User with the id: ${id}`);
       } else {
-        util.setSuccess(200, "User updated", updateUser);
+        util.setSuccess(200, 'User updated', updateUser);
       }
       return util.send(res);
     } catch (error) {
@@ -60,7 +60,7 @@ class UserController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      util.setError(400, "Please input a valid numeric value");
+      util.setError(400, 'Please input a valid numeric value');
       return util.send(res);
     }
 
@@ -70,7 +70,7 @@ class UserController {
       if (!theUser) {
         util.setError(404, `Cannot find User with the id ${id}`);
       } else {
-        util.setSuccess(200, "Found User", theUser);
+        util.setSuccess(200, 'Found User', theUser);
       }
       return util.send(res);
     } catch (error) {
@@ -83,7 +83,7 @@ class UserController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      util.setError(400, "Please provide a numeric value");
+      util.setError(400, 'Please provide a numeric value');
       return util.send(res);
     }
 
@@ -91,7 +91,7 @@ class UserController {
       const UserToDelete = await UserService.deleteUser(id);
 
       if (UserToDelete) {
-        util.setSuccess(200, "User deleted");
+        util.setSuccess(200, 'User deleted');
       } else {
         util.setError(404, `User with the id ${id} cannot be found`);
       }

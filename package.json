@@ -2,13 +2,19 @@
   "name": "nodejs-express-sequelize-template",
   "version": "1.0.0",
   "description": "NodeJS Express App with Sequelize ORM",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon",
+    "start": "node ./src/index.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "prettier-format": "prettier --config .prettierrc './src/**/*.js' --write",
+    "test": "NODE_ENV=stage nyc -r text-summary mocha -r @babel/register -r dotenv/config 'test/**/*.spec.js' --exit",
+    "coverage": "nyc -r text -r text-summary -r html npm run test",
     "db:create": "sequelize db:create",
     "db:drop": "sequelize db:drop",
-    "db:migrate": "sequelize db:migrate"
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -38,15 +44,21 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "@babel/runtime": "^7.11.2",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-istanbul": "^6.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "mocha": "^8.1.3",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
+    "prettier": "^2.1.1",
     "sequelize-cli": "^6.2.0"
   }
 }
