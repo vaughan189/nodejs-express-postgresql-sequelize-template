@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+services:
+  - postgresql
+
+env:
+  global:
+  - NODE_ENV=test
+
+before_script:
+  - psql -c 'create database $DATABASE;' -U $DIALECT
+  - psql -c "CREATE USER $DB_USER WITH PASSWORD $DB_PASS;" -U $DIALECT
+  - npm run build
+  - npm install -g sequelize-cli
+  - sequelize db:migrate
+script:
+  - npm run test
+after_success:
+  - npm run coverage
