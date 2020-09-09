@@ -16,7 +16,7 @@
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo:all",
     "generate-lcov": "nyc report --reporter=text-lcov > info.lcov",
-    "coveralls-coverage": "coveralls < lcov.info",
+    "coveralls-coverage": "coveralls < info.lcov",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
     "coverage": "nyc npm run test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
