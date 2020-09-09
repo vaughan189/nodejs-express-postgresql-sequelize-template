@@ -15,8 +15,8 @@
     "db:drop": "sequelize db:drop",
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo:all",
-    "generate-lcov": "nyc report --reporter=text-lcov > info.lcov",
-    "coveralls-coverage": "coveralls < info.lcov",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
     "coverage": "nyc npm run test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
@@ -53,7 +53,6 @@
     "babel-plugin-istanbul": "^6.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "coveralls": "^3.1.0",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.11.0",
