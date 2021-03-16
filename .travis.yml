@@ -19,3 +19,11 @@ script:
 after_success:
 - npm run generate-lcov
 - npm run coveralls-coverage
+deploy:
+  provider: heroku
+  api_key:
+    secure: ydva9Pe/5XXkGsX9HF8px53WoMzjVjQKyFEqM71BIAlYGWa0p5qGzfaQ2QCi0Z2DubzTtItBEiSd84V7Ilc3BFUw6JXje9kFY/OvRpF7mWkQHG7I4VJNidfBeg9yGtz01IK0zHnCyW/3hQ3SjhVpAzqR35RnPH925VcPgu0g9d4WpNOnvmBoMhAlsqtCmWCwSkOVQDWGnJ1dZRWrk9bxfdF0zJmg1Hr7i7CUHbxZgQ/yncVZCQ24oAKQUnNpLkXrX7xn5yKb8kvQ0LVkwsPw9FxuJeExFKqAKeD0F0js2riLCbhdp24ZUC6tNNC+TF8z8NfhphIvHDr1kg0Ob2b8TJrlYZukgxRChGGHNXTjT4o5kcbIxSSQLrHMdC1mRQEpbeoH+0sIzi3aQEg1v02L3OdvJjVErUPzNzYc6ZhI01lXmC3n6m5NCK31yc5/mT7FDo6OZGBqXjyQHiB0MF0AW82YOG4VaIvFcte+X4aOeVb++rCdbhANa9odcvQIMyJN/cFl6IuJJPFJEGmkm1IH0jcn7H58lorXQrPnAB6OzdUyxwX94P2bIkTuRa+nlAF/qZQGTMK16suPGgLkY7Aj1BomyE5qEjrKCgVJCeakwusHilWnSpKTCQr+/NoPu/2lxAvgmvIKO7dOWIGBur+GZDve4ypDlaBQEXmXTR+NZ00=
+  app: "nodejs-express-postgre-sequliz"
+  on:
+    repo: vaughan189/nodejs-express-postgresql-sequelize-template
+  cleanup: true
