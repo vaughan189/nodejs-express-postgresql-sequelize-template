@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 

@@ -6,7 +6,13 @@ configuration.db = {
   database: process.env.DATABASE,
   host: process.env.DB_HOST,
   dialect: process.env.DIALECT,
-  operatorsAliases: process.env.OPERATOR_ALIASES
+  operatorsAliases: process.env.OPERATOR_ALIASES,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 };
 
 module.exports = configuration;
