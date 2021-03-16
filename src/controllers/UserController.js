@@ -1,3 +1,4 @@
+import { HTTP_CODES, NUMBERS } from '../constants';
 import UserService from '../services/UserService';
 import Util from '../utils/Utils';
 
@@ -7,30 +8,30 @@ class UserController {
   static async getAllUsers(req, res) {
     try {
       const allUsers = await UserService.getAllUsers();
-      if (allUsers.length > 0) {
-        util.setSuccess(200, 'Users retrieved', allUsers);
+      if (allUsers.length > NUMBERS.ZERO) {
+        util.setSuccess(HTTP_CODES.OK, 'Users retrieved', allUsers);
       } else {
-        util.setSuccess(200, 'No User found');
+        util.setSuccess(HTTP_CODES.OK, 'No User found');
       }
       return util.send(res);
     } catch (error) {
-      util.setError(400, error);
+      util.setError(HTTP_CODES.BAD_REQUEST, error);
       return util.send(res);
     }
   }
 
   static async addUser(req, res) {
     // if (!req.body.title || !req.body.price || !req.body.description) {
-    //   util.setError(400, "Please provide complete details");
+    //   util.setError(HTTP_CODES.BAD_REQUEST, "Please provide complete details");
     //   return util.send(res);
     // }
     const newUser = req.body;
     try {
       const createdUser = await UserService.addUser(newUser);
-      util.setSuccess(201, 'User Added!', createdUser);
+      util.setSuccess(HTTP_CODES.CREATED, 'User Added!', createdUser);
       return util.send(res);
     } catch (error) {
-      util.setError(400, error.message);
+      util.setError(HTTP_CODES.BAD_REQUEST, error.message);
       return util.send(res);
     }
   }
@@ -39,19 +40,25 @@ class UserController {
     const alteredUser = req.body;
     const { id } = req.params;
     if (!Number(id)) {
-      util.setError(400, 'Please input a valid numeric value');
+      util.setError(
+        HTTP_CODES.BAD_REQUEST,
+        'Please input a valid numeric value'
+      );
       return util.send(res);
     }
     try {
       const updateUser = await UserService.updateUser(id, alteredUser);
       if (!updateUser) {
-        util.setError(404, `Cannot find User with the id: ${id}`);
+        util.setError(
+          HTTP_CODES.NOT_FOUND,
+          `Cannot find User with the id: ${id}`
+        );
       } else {
-        util.setSuccess(200, 'User updated', updateUser);
+        util.setSuccess(HTTP_CODES.OK, 'User updated', updateUser);
       }
       return util.send(res);
     } catch (error) {
-      util.setError(404, error);
+      util.setError(HTTP_CODES.NOT_FOUND, error);
       return util.send(res);
     }
   }
@@ -60,7 +67,10 @@ class UserController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      util.setError(400, 'Please input a valid numeric value');
+      util.setError(
+        HTTP_CODES.BAD_REQUEST,
+        'Please input a valid numeric value'
+      );
       return util.send(res);
     }
 
@@ -68,13 +78,16 @@ class UserController {
       const theUser = await UserService.getAUser(id);
 
       if (!theUser) {
-        util.setError(404, `Cannot find User with the id ${id}`);
+        util.setError(
+          HTTP_CODES.NOT_FOUND,
+          `Cannot find User with the id ${id}`
+        );
       } else {
-        util.setSuccess(200, 'Found User', theUser);
+        util.setSuccess(HTTP_CODES.OK, 'Found User', theUser);
       }
       return util.send(res);
     } catch (error) {
-      util.setError(404, error);
+      util.setError(HTTP_CODES.NOT_FOUND, error);
       return util.send(res);
     }
   }
@@ -83,7 +96,7 @@ class UserController {
     const { id } = req.params;
 
     if (!Number(id)) {
-      util.setError(400, 'Please provide a numeric value');
+      util.setError(HTTP_CODES.BAD_REQUEST, 'Please provide a numeric value');
       return util.send(res);
     }
 
@@ -91,13 +104,16 @@ class UserController {
       const UserToDelete = await UserService.deleteUser(id);
 
       if (UserToDelete) {
-        util.setSuccess(200, 'User deleted');
+        util.setSuccess(HTTP_CODES.OK, 'User deleted');
       } else {
-        util.setError(404, `User with the id ${id} cannot be found`);
+        util.setError(
+          HTTP_CODES.NOT_FOUND,
+          `User with the id ${id} cannot be found`
+        );
       }
       return util.send(res);
     } catch (error) {
-      util.setError(400, error);
+      util.setError(HTTP_CODES.BAD_REQUEST, error);
       return util.send(res);
     }
   }
